@@ -22,13 +22,16 @@ function renderToy(toy) {
   likeBtn.setAttribute("id", toy.id);
   likeBtn.textContent = "Like";
   likeBtn.addEventListener("click", (e) => {
+    //Need to first increase the value 
+    toy.likes = toy.likes + 1
+    
     fetch(`${url}/toys/${toy.id}`, {
       method: "PATCH",
       headers: {
         "content-type" : "application/json",
         "accept": "application/json"
       },
-      body: JSON.stringify({likes: toy.likes += 1})
+      body: JSON.stringify({likes: toy.likes})
     })
     .then(res => res.json())
     .then(data => {
